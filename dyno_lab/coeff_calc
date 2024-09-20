@@ -1,0 +1,26 @@
+import pandas as pd
+import numpy as np
+from sklearn.linear_model import LinearRegression
+
+# Load data from CSV
+data = pd.read_csv('dyno_lab/16v-8in/PropTest_teamNick_16v_8in__2024-09-13_135751.csv')
+
+
+# Assuming the data has two columns: 'x' and 'y'
+x = data['Motor Optical Speed (RPM)'].values
+y = data['Thrust (kgf)'].values
+
+# Transform x to x^5
+x_transformed = (x * 2 * np.pi / 60)**2
+
+# Reshape x for fitting (required for sklearn)
+x_transformed = x_transformed.reshape(-1, 1)
+
+# Fit the linear model y = c_0 * x^5
+model = LinearRegression().fit(x_transformed, y)
+
+# Get the coefficient (c_0)
+c_0 = model.coef_[0]
+intercept = model.intercept_
+print("Coefficient c_0:", c_0)
+print("Intercept:", intercept)
