@@ -1,26 +1,79 @@
 import pandas as pd
 import numpy as np
 from sklearn.linear_model import LinearRegression
+import matplotlib.pyplot as plt
 
 # Load data from CSV
-data = pd.read_csv('dyno_lab/16v-8in/PropTest_teamNick_16v_8in__2024-09-13_135751.csv')
+data = pd.read_csv('dyno_lab/16v-10in/PropTest_teamNick_16v_10in__2024-09-13_141537.csv')
 
+config = "16V-10in-normal"
 
 # Assuming the data has two columns: 'x' and 'y'
 x = data['Motor Optical Speed (RPM)'].values
-y = data['Thrust (kgf)'].values
+T = data['Thrust (kgf)'].values
+M = data['Torque (N·m)'].values
+
 
 # Transform x to x^5
 x_transformed = (x * 2 * np.pi / 60)**2
+x2 = x ** 2
+x_lin = x[2:-2]
+throttle = np.arange(0.2, 0.9, 0.1)
 
 # Reshape x for fitting (required for sklearn)
 x_transformed = x_transformed.reshape(-1, 1)
+x2 = x2.reshape(-1,1)
+throttle = throttle.reshape(-1,1)
 
-# Fit the linear model y = c_0 * x^5
-model = LinearRegression().fit(x_transformed, y)
+# Fit the linear model y = c_0 * x^2
+model_T = LinearRegression(fit_intercept=False).fit(x2, T)
+model_M = LinearRegression(fit_intercept=False).fit(x2, M)
+model_C = LinearRegression().fit(throttle, x_lin)
 
 # Get the coefficient (c_0)
-c_0 = model.coef_[0]
-intercept = model.intercept_
-print("Coefficient c_0:", c_0)
-print("Intercept:", intercept)
+c_T = model_T.coef_[0]
+c_M = model_M.coef_[0]
+c_R = model_C.coef_[0]
+w_b = model_C.intercept_
+print("Coefficient c_T:", c_T)
+print("Coefficient c_M:", c_M)
+print("Coefficient c_R:", c_R)
+print("Coefficient w_b:", w_b)
+# print("Intercept:", intercept)
+
+plot_x = np.linspace(0,x[-1],100)
+# 1
+plt.figure(1)
+plt.scatter(x, T, label='Data Points')
+quadratic_trendline = np.polyval([c_T, 0, 0], plot_x)
+plt.plot(plot_x, quadratic_trendline, label=f'Trendline: {c_T}$x^2$', color='red', linestyle=':')
+plt.title(f'Quadratic Fit of Thrust vs. RPM ({config})')
+plt.xlabel('RPM')
+plt.ylabel('Thrust (kgf)')
+plt.legend()
+plt.grid(True)
+
+#2
+plt.figure(2)
+plt.scatter(x, -M, label='Data Points')
+quadratic_trendline = np.polyval([-c_M, 0, 0], plot_x)
+plt.plot(plot_x, quadratic_trendline, label=f'Trendline: {-c_M}$x^2$', color='red', linestyle=':')
+plt.title(f'Quadratic Fit of Torque vs. RPM ({config})')
+plt.xlabel('RPM')
+plt.ylabel('Torque (Nm)')
+plt.legend()
+plt.grid(True)
+
+#3
+plot_throttle = np.arange(0, 1.1, 0.1)
+plt.figure(3)
+plt.scatter(plot_throttle, x, label='Data Points')
+plt.plot(plot_throttle, x)
+quadratic_trendline = np.polyval([c_R, w_b], plot_throttle)
+plt.plot(plot_throttle, quadratic_trendline, label=f'Trendline: {c_R}$x$ + {w_b}', color='red', linestyle=':')
+plt.title(f'Linear Fit of RPM vs. Throttle Command ({config})')
+plt.xlabel('Throttle Command $\sigma$')
+plt.ylabel('RPM')
+plt.legend()
+plt.grid(True)
+plt.show()
