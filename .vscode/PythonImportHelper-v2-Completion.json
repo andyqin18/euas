@@ -1,0 +1,110 @@
+[
+    {
+        "label": "pandas",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "pandas",
+        "description": "pandas",
+        "detail": "pandas",
+        "documentation": {}
+    },
+    {
+        "label": "matplotlib.pyplot",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "matplotlib.pyplot",
+        "description": "matplotlib.pyplot",
+        "detail": "matplotlib.pyplot",
+        "documentation": {}
+    },
+    {
+        "label": "numpy",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "numpy",
+        "description": "numpy",
+        "detail": "numpy",
+        "documentation": {}
+    },
+    {
+        "label": "file_name",
+        "kind": 5,
+        "importPath": "dyno_lab.Tm",
+        "description": "dyno_lab.Tm",
+        "peekOfCode": "file_name = 'dyno_lab/16v-8in-slowpitch/StepTest_teamNick_16V_8in_slowpitch__2024-09-13_142313.csv'\ndf = pd.DataFrame(pd.read_csv(file_name))\nX = (df['Time (s)']).to_list()[35:56]\nY = (df['Motor Optical Speed (RPM)']).to_list()[35:56]\nmax_Y = max(Y)\nmax_index = Y.index(max_Y)\ntarget_Y = 0.632 * max_Y\nplt.plot(X, Y, marker='o')\nx_interp = np.interp(target_Y, Y[0:4], X[0: 4])\nprint(\"Tm: \", x_interp - X[1])",
+        "detail": "dyno_lab.Tm",
+        "documentation": {}
+    },
+    {
+        "label": "df",
+        "kind": 5,
+        "importPath": "dyno_lab.Tm",
+        "description": "dyno_lab.Tm",
+        "peekOfCode": "df = pd.DataFrame(pd.read_csv(file_name))\nX = (df['Time (s)']).to_list()[35:56]\nY = (df['Motor Optical Speed (RPM)']).to_list()[35:56]\nmax_Y = max(Y)\nmax_index = Y.index(max_Y)\ntarget_Y = 0.632 * max_Y\nplt.plot(X, Y, marker='o')\nx_interp = np.interp(target_Y, Y[0:4], X[0: 4])\nprint(\"Tm: \", x_interp - X[1])\nplt.axhline(y=max_Y, color='red', linestyle='--', label='$\\omega_{ss}$ = '+f'{max_Y}')",
+        "detail": "dyno_lab.Tm",
+        "documentation": {}
+    },
+    {
+        "label": "X",
+        "kind": 5,
+        "importPath": "dyno_lab.Tm",
+        "description": "dyno_lab.Tm",
+        "peekOfCode": "X = (df['Time (s)']).to_list()[35:56]\nY = (df['Motor Optical Speed (RPM)']).to_list()[35:56]\nmax_Y = max(Y)\nmax_index = Y.index(max_Y)\ntarget_Y = 0.632 * max_Y\nplt.plot(X, Y, marker='o')\nx_interp = np.interp(target_Y, Y[0:4], X[0: 4])\nprint(\"Tm: \", x_interp - X[1])\nplt.axhline(y=max_Y, color='red', linestyle='--', label='$\\omega_{ss}$ = '+f'{max_Y}')\nplt.axhline(y=target_Y, color='red', linestyle='--', label='$\\omega$ = 0.632$\\omega_{ss}$ = '+f'{target_Y}')",
+        "detail": "dyno_lab.Tm",
+        "documentation": {}
+    },
+    {
+        "label": "Y",
+        "kind": 5,
+        "importPath": "dyno_lab.Tm",
+        "description": "dyno_lab.Tm",
+        "peekOfCode": "Y = (df['Motor Optical Speed (RPM)']).to_list()[35:56]\nmax_Y = max(Y)\nmax_index = Y.index(max_Y)\ntarget_Y = 0.632 * max_Y\nplt.plot(X, Y, marker='o')\nx_interp = np.interp(target_Y, Y[0:4], X[0: 4])\nprint(\"Tm: \", x_interp - X[1])\nplt.axhline(y=max_Y, color='red', linestyle='--', label='$\\omega_{ss}$ = '+f'{max_Y}')\nplt.axhline(y=target_Y, color='red', linestyle='--', label='$\\omega$ = 0.632$\\omega_{ss}$ = '+f'{target_Y}')\nplt.axvline(x=x_interp, color='blue', linestyle='--', label=f'$t_e$ = {x_interp:.3f}')",
+        "detail": "dyno_lab.Tm",
+        "documentation": {}
+    },
+    {
+        "label": "max_Y",
+        "kind": 5,
+        "importPath": "dyno_lab.Tm",
+        "description": "dyno_lab.Tm",
+        "peekOfCode": "max_Y = max(Y)\nmax_index = Y.index(max_Y)\ntarget_Y = 0.632 * max_Y\nplt.plot(X, Y, marker='o')\nx_interp = np.interp(target_Y, Y[0:4], X[0: 4])\nprint(\"Tm: \", x_interp - X[1])\nplt.axhline(y=max_Y, color='red', linestyle='--', label='$\\omega_{ss}$ = '+f'{max_Y}')\nplt.axhline(y=target_Y, color='red', linestyle='--', label='$\\omega$ = 0.632$\\omega_{ss}$ = '+f'{target_Y}')\nplt.axvline(x=x_interp, color='blue', linestyle='--', label=f'$t_e$ = {x_interp:.3f}')\nplt.axvline(x=X[1], color='blue', linestyle='--', label=f'$t_s$ = {X[1]:.3f}')",
+        "detail": "dyno_lab.Tm",
+        "documentation": {}
+    },
+    {
+        "label": "max_index",
+        "kind": 5,
+        "importPath": "dyno_lab.Tm",
+        "description": "dyno_lab.Tm",
+        "peekOfCode": "max_index = Y.index(max_Y)\ntarget_Y = 0.632 * max_Y\nplt.plot(X, Y, marker='o')\nx_interp = np.interp(target_Y, Y[0:4], X[0: 4])\nprint(\"Tm: \", x_interp - X[1])\nplt.axhline(y=max_Y, color='red', linestyle='--', label='$\\omega_{ss}$ = '+f'{max_Y}')\nplt.axhline(y=target_Y, color='red', linestyle='--', label='$\\omega$ = 0.632$\\omega_{ss}$ = '+f'{target_Y}')\nplt.axvline(x=x_interp, color='blue', linestyle='--', label=f'$t_e$ = {x_interp:.3f}')\nplt.axvline(x=X[1], color='blue', linestyle='--', label=f'$t_s$ = {X[1]:.3f}')\nplt.scatter([x_interp], [target_Y], color='purple', zorder=5)",
+        "detail": "dyno_lab.Tm",
+        "documentation": {}
+    },
+    {
+        "label": "target_Y",
+        "kind": 5,
+        "importPath": "dyno_lab.Tm",
+        "description": "dyno_lab.Tm",
+        "peekOfCode": "target_Y = 0.632 * max_Y\nplt.plot(X, Y, marker='o')\nx_interp = np.interp(target_Y, Y[0:4], X[0: 4])\nprint(\"Tm: \", x_interp - X[1])\nplt.axhline(y=max_Y, color='red', linestyle='--', label='$\\omega_{ss}$ = '+f'{max_Y}')\nplt.axhline(y=target_Y, color='red', linestyle='--', label='$\\omega$ = 0.632$\\omega_{ss}$ = '+f'{target_Y}')\nplt.axvline(x=x_interp, color='blue', linestyle='--', label=f'$t_e$ = {x_interp:.3f}')\nplt.axvline(x=X[1], color='blue', linestyle='--', label=f'$t_s$ = {X[1]:.3f}')\nplt.scatter([x_interp], [target_Y], color='purple', zorder=5)\nplt.title('Response Curve (16V-8in-normal)')",
+        "detail": "dyno_lab.Tm",
+        "documentation": {}
+    },
+    {
+        "label": "x_interp",
+        "kind": 5,
+        "importPath": "dyno_lab.Tm",
+        "description": "dyno_lab.Tm",
+        "peekOfCode": "x_interp = np.interp(target_Y, Y[0:4], X[0: 4])\nprint(\"Tm: \", x_interp - X[1])\nplt.axhline(y=max_Y, color='red', linestyle='--', label='$\\omega_{ss}$ = '+f'{max_Y}')\nplt.axhline(y=target_Y, color='red', linestyle='--', label='$\\omega$ = 0.632$\\omega_{ss}$ = '+f'{target_Y}')\nplt.axvline(x=x_interp, color='blue', linestyle='--', label=f'$t_e$ = {x_interp:.3f}')\nplt.axvline(x=X[1], color='blue', linestyle='--', label=f'$t_s$ = {X[1]:.3f}')\nplt.scatter([x_interp], [target_Y], color='purple', zorder=5)\nplt.title('Response Curve (16V-8in-normal)')\nplt.xlabel('Time (s)')\nplt.ylabel('Motor Optical Speed (RPM)')",
+        "detail": "dyno_lab.Tm",
+        "documentation": {}
+    },
+    {
+        "label": "a",
+        "kind": 5,
+        "importPath": "test",
+        "description": "test",
+        "peekOfCode": "a = np.array([1, 2, 3])",
+        "detail": "test",
+        "documentation": {}
+    }
+]
